@@ -1,0 +1,40 @@
+install.packages("matlib")# installing this package to use solve()
+library(matlib)#calling the function 
+#working with matrix 
+#creating  a matrix A and B 
+A<-matrix(1:100, nrow=10)
+A
+#solve() is a standard R function for finding matrix inverse in R
+# that calculates inverse matrix by calculating adjoint of matrix and determinant of matrix
+#but when tried solving in our matrix it throws an errorlike 
+#Error in solve.default(A) :
+#Lapack routine dgesv: system is exactly singular: U[6,6] = 0
+solve(A)
+# to overcome this error 
+# i am creating a matrix containing numbers from 1 to 100.size of matrix is 100
+A<-matrix(sample.int(100,size=100,replace=TRUE),nrow=10,ncol=10)
+A
+#now trying to find the inverse of matrix and storing it in a variable called inverseA
+Ainverse<-solve(A)
+Ainverse
+#to check the produced inverse is correct we multiply
+#A %*% Ainverse = identity matrix
+round(A %*% Ainverse)
+#the above resulted in identity matrix so the solve function has calculated
+#inverse of matrix correctly 
+#determinant of A 
+det(A)
+
+# the same technique is used to solve the inverse of matrix B 
+# instead of using this matrix 
+B <- matrix(1:1000, nrow=10) 
+# creating a matrix that contains 1 to 1000 value and size of matrix to be 1000
+B<-matrix(sample.int(1000,size=1000,replace=TRUE),nrow=10,ncol=10)
+B
+Binverse<-solve(B)
+Binverse
+# trying to calculate the inverse matrix is correct or not by multiply B and inverseB
+#should produce identity matrix
+round(B %*% Binverse)
+# as it produce identity matrix the solve function works well to calculate inverse matrix
+det(B)
